@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Café Starmarc | Tu Café del Barrio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        amber: {
+                            50: '#fffbe1',
+                            100: '#fef3c7',
+                            300: '#fcd34d',
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                        },
+                        coffee: {
+                            50: '#fdfbf7',
+                            100: '#f4efe6',
+                            200: '#e6dacb',
+                            700: '#523e36',
+                            800: '#3e2d26',
+                            900: '#2a1d18',
+                        },
+                        linen: '#FAF8F5',
+                        warmwhite: '#FFFDF9'
+                    },
+                    fontFamily: {
+                        serif: ['Cinzel', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: #FAF8F5;
+            color: #2A1D18;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #FAF8F5;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #F59E0B;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #D97706;
+        }
+
+        .bg-pattern {
+            background-image: radial-gradient(#D97706 0.5px, transparent 0.5px), radial-gradient(#D97706 0.5px, #FAF8F5 0.5px);
+            background-size: 24px 24px;
+            background-position: 0 0, 12px 12px;
+            opacity: 0.12;
+        }
+
+        .glass-card {
+            background: rgba(255, 253, 249, 0.88);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(217, 119, 6, 0.2);
+        }
+
+        .toast-notification {
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+    </style>
+</head>
+<body class="relative text-coffee-900 antialiased selection:bg-amber-300 selection:text-coffee-900">
+
+    <header class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-linen/90 backdrop-blur-md border-b border-amber-500/20" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <!-- Brand Logo & Name -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-11 h-11 rounded-2xl bg-amber-500 flex items-center justify-center text-warmwhite text-xl font-bold shadow-md transition-transform duration-300 group-hover:scale-105 group-hover:rotate-6">
+                    <i class="fa-solid fa-mug-hot text-coffee-900"></i>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-serif text-2xl tracking-wide text-coffee-900 font-bold uppercase">Café Starmarc</span>
+                    <span class="text-[10px] tracking-widest text-amber-600 font-semibold uppercase">Tu Café del Barrio • Todos los días desde las 7 a.m.</span>
+                </div>
+            </a>
+
+            <!-- Desktop Menu -->
+            <nav class="hidden md:flex items-center space-x-8 text-xs font-bold tracking-wider uppercase text-coffee-800">
+                <a href="#inicio" class="hover:text-amber-600 transition-colors">Inicio</a>
+                <a href="#concepto" class="hover:text-amber-600 transition-colors">El Barrio</a>
+                <a href="#metodos" class="hover:text-amber-600 transition-colors">Preparaciones</a>
+                <a href="#ordenar" class="hover:text-amber-600 transition-colors">Hacer Pedido</a>
+                <a href="#ubicacion" class="hover:text-amber-600 transition-colors">Ubicación<ahuachapan,centro/a>
+            </nav>
+
+            <!-- CTA Direct WhatsApp Header -->
+            <div class="hidden md:flex items-center gap-4">
+                <a href="https://wa.me/50373527729?text=Hola%20Café%20Starmarc,%20me%20gustaría%20obtener%20información%20de%20su%20menú" target="_blank" class="px-5 py-2.5 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold text-xs tracking-wider uppercase transition-all shadow-md hover:shadow-lg flex items-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-base"></i>
+                    <span>WhatsApp 73527729</span>
+                </a>
+            </div>
+
+            <!-- Mobile Menu Toggle Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-coffee-900 focus:outline-none p-2 rounded-lg hover:bg-coffee-100">
+                <i class="fa-solid fa-bars text-2xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Navigation -->
+        <div id="mobile-menu" class="hidden md:hidden bg-linen border-b border-amber-500/20 px-6 py-6 space-y-4 shadow-xl">
+            <a href="#inicio" class="block text-coffee-900 font-semibold hover:text-amber-600 uppercase text-xs tracking-widest">Inicio</a>
+            <a href="#concepto" class="block text-coffee-900 font-semibold hover:text-amber-600 uppercase text-xs tracking-widest">El Barrio</a>
+            <a href="#metodos" class="block text-coffee-900 font-semibold hover:text-amber-600 uppercase text-xs tracking-widest">Preparaciones</a>
+            <a href="#ordenar" class="block text-coffee-900 font-semibold hover:text-amber-600 uppercase text-xs tracking-widest">Hacer Pedido</a>
+            <a href="#ubicacion" class="block text-coffee-900 font-semibold hover:text-amber-600 uppercase text-xs tracking-widest">Ubicación</a>
+            <a href="https://wa.me/50373527729?text=Hola%20Café%20Starmarc" target="_blank" class="inline-flex w-full justify-center items-center gap-2 px-5 py-3 rounded-full bg-emerald-600 text-white font-bold uppercase text-xs tracking-wider shadow-sm">
+                <i class="fa-brands fa-whatsapp text-lg"></i>
+                <span>Escribir al 73527729</span>
+            </a>
+        </div>
+    </header>
+
+    <section id="inicio" class="relative min-h-screen pt-28 pb-16 flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 bg-pattern z-0"></div>
+        <div class="absolute top-1/4 -right-20 w-96 h-96 bg-amber-300/30 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-10 -left-20 w-96 h-96 bg-amber-500/20 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-6 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-100 border border-amber-300 text-coffee-900 text-xs tracking-widest uppercase font-bold shadow-sm">
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
+                    <span>Abierto Todos los Días desde las 7 a.m.</span>
+                </div>
+
+                <!-- MAIN MANDATORY H1 TITLE -->
+                <h1 class="font-serif text-5xl sm:text-7xl lg:text-8xl font-extrabold leading-none tracking-tight text-coffee-900">
+                    Café Starmarc
+                </h1>
+
+                <p class="text-amber-600 font-serif text-xl sm:text-2xl italic font-semibold">
+                    Tu café del barrio, con la máxima calidad y métodos artesanales.
+                </p>
+
+                <p class="text-coffee-700/90 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed font-normal">
+                    Disfruta de nuestros selectos métodos de preparación: <strong class="text-coffee-900 underline decoration-amber-400">Espreso, Filtrado y Prensa Francesa</strong>. Realiza tu orden directamente por WhatsApp y te la preparamos al instante.
+                </p>
+
+                <div class="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                    <a href="#ordenar" class="w-full sm:w-auto px-8 py-4 rounded-full bg-coffee-900 hover:bg-coffee-800 text-warmwhite font-bold text-xs tracking-widest uppercase transition-all shadow-xl hover:shadow-2xl flex items-center justify-center gap-3 group">
+                        <span>Hacer Pedido a WhatsApp</span>
+                        <i class="fa-brands fa-whatsapp text-amber-300 text-base group-hover:scale-125 transition-transform"></i>
+                    </a>
+                    <a href="#metodos" class="w-full sm:w-auto px-8 py-4 rounded-full bg-warmwhite hover:bg-linen border-2 border-coffee-900/20 text-coffee-900 font-bold text-xs tracking-widest uppercase transition-all flex items-center justify-center">
+                        Ver Menú y Precios
+                    </a>
+                </div>
+
+                <!-- Info Counters Bar -->
+                <div class="pt-6 border-t border-coffee-900/10 flex flex-wrap items-center justify-center lg:justify-start gap-6 text-xs font-medium text-coffee-800">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-clock text-amber-500 text-lg"></i>
+                        <span>Atención: <strong>7:00 a.m. - 7:00 p.m.</strong></span>
+                    </div>
+                    <div class="h-4 w-px bg-coffee-900/20 hidden sm:block"></div>
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-phone text-emerald-600 text-lg"></i>
+                        <span>WhatsApp Directo: <strong>73527729</strong></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MANDATORY IMAGE HERO WITH SPECIFIC IMAGE URL -->
+            <div class="lg:col-span-5 relative">
+                <div class="relative mx-auto max-w-md lg:max-w-none">
+                    <div class="rounded-3xl overflow-hidden shadow-2xl border-4 border-warmwhite relative group">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNer6bsYvqCfiIxxFDfPVUePCMuyF5UwflcO3eAYUouVi4AqTXeYPNRMo&s=10" 
+                             alt="Café Starmarc - Una taza de café del barrio" 
+                             class="w-full h-[460px] object-cover transition-transform duration-700 group-hover:scale-105"
+                             onerror="this.src='https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=800&auto=format&fit=crop'"/>
+                        <div class="absolute inset-0 bg-gradient-to-t from-coffee-900/70 via-transparent to-transparent"></div>
+                        <div class="absolute bottom-6 left-6 right-6 text-warmwhite">
+                            <span class="text-xs tracking-widest uppercase font-bold text-amber-300">Café Starmarc</span>
+                            <h3 class="font-serif text-2xl font-bold">Una taza de café auténtica</h3>
+                            <p class="text-xs text-coffee-100/80 mt-1">Frescura en cada extracción diaria.</p>
+                        </div>
+                    </div>
+
+                    <!-- Floating Badge -->
+                    <div class="absolute -bottom-6 -left-6 glass-card p-4 rounded-2xl shadow-xl max-w-[220px] border border-amber-400/40 hidden sm:block">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-amber-500 flex items-center justify-center text-coffee-900 text-lg font-bold">
+                                <i class="fa-solid fa-heart"></i>
+                            </div>
+                            <div>
+                                <p class="text-[11px] uppercase font-bold text-coffee-900">Café del Barrio</p>
+                                <p class="text-[10px] text-coffee-700 leading-tight">Servido caliente o frío a tu gusto</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Badge Stamp -->
+                    <div class="absolute -top-6 -right-6 w-24 h-24 rounded-full bg-amber-400 text-coffee-900 flex flex-col items-center justify-center text-center p-2 shadow-lg border-2 border-linen rotate-12">
+                        <span class="font-serif text-xs font-bold leading-tight uppercase">STARMARC</span>
+                        <span class="text-[9px] font-bold tracking-tighter">DESDE LAS 7AM</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="concepto" class="py-20 bg-warmwhite border-y border-amber-500/20">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto space-y-4 mb-16">
+                <span class="text-amber-600 text-xs font-bold tracking-widest uppercase">Nuestra Filosofía</span>
+                <h2 class="font-serif text-3xl sm:text-5xl font-bold text-coffee-900">Café del Barrio con Pasión</h2>
+                <div class="w-20 h-1 bg-amber-400 mx-auto rounded-full"></div>
+                <p class="text-coffee-700 text-base leading-relaxed">
+                    En <strong>Café Starmarc</strong> creemos en la hospitalidad cálida, la atención personalizada y el respeto por el grano de especialidad. Abrimos todos los días temprano para acompañar tus mañanas y tardes.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="glass-card rounded-3xl p-8 relative overflow-hidden hover:shadow-xl transition-all border border-amber-300/30 flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded-2xl bg-amber-400/20 flex items-center justify-center text-amber-600 text-2xl font-bold">
+                            <i class="fa-solid fa-sun"></i>
+                        </div>
+                        <span class="inline-block px-3 py-1 rounded-full bg-amber-100 text-amber-700 text-[10px] uppercase font-bold tracking-wider">
+                            Horario Temprano
+                        </span>
+                        <h3 class="font-serif text-2xl font-bold text-coffee-900">Desde las 7:00 a.m.</h3>
+                        <p class="text-xs text-coffee-700 leading-relaxed">
+                            Comienza tu jornada con café recién molido y extraído al momento. Abre tus mañanas con la mejor energía de la zona.
+                        </p>
+                    </div>
+                    <div class="pt-6 border-t border-coffee-900/10 mt-6">
+                        <span class="text-xs text-amber-700 font-bold"><i class="fa-solid fa-check text-emerald-500 mr-2"></i>Todos los días del año</span>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="glass-card rounded-3xl p-8 relative overflow-hidden hover:shadow-xl transition-all border border-amber-300/30 flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded-2xl bg-amber-400/20 flex items-center justify-center text-amber-600 text-2xl font-bold">
+                            <i class="fa-solid fa-blender text-amber-600"></i>
+                        </div>
+                        <span class="inline-block px-3 py-1 rounded-full bg-amber-100 text-amber-700 text-[10px] uppercase font-bold tracking-wider">
+                            Variedad de Métodos
+                        </span>
+                        <h3 class="font-serif text-2xl font-bold text-coffee-900">3 Métodos Clásicos</h3>
+                        <p class="text-xs text-coffee-700 leading-relaxed">
+                            Contamos con **Espreso**, **Filtrado (V60/Pour Over)** y **Prensa Francesa**, para que disfrutes la intensidad que prefieras.
+                        </p>
+                    </div>
+                    <div class="pt-6 border-t border-coffee-900/10 mt-6">
+                        <span class="text-xs text-amber-700 font-bold"><i class="fa-solid fa-check text-emerald-500 mr-2"></i>Extracción al instante</span>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="glass-card rounded-3xl p-8 relative overflow-hidden hover:shadow-xl transition-all border border-amber-300/30 flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded-2xl bg-amber-400/20 flex items-center justify-center text-amber-600 text-2xl font-bold">
+                            <i class="fa-brands fa-whatsapp text-emerald-600"></i>
+                        </div>
+                        <span class="inline-block px-3 py-1 rounded-full bg-emerald-100 text-emerald-700 text-[10px] uppercase font-bold tracking-wider">
+                            Pedidos Directos
+                        </span>
+                        <h3 class="font-serif text-2xl font-bold text-coffee-900">WhatsApp 73527729</h3>
+                        <p class="text-xs text-coffee-700 leading-relaxed">
+                            Pide por adelantado y pasa a recogerlo o solicítalo a tu mesa sin esperas. Pedido rápido y directo.
+                        </p>
+                    </div>
+                    <div class="pt-6 border-t border-coffee-900/10 mt-6">
+                        <a href="https://wa.me/50373527729" target="_blank" class="text-xs text-emerald-600 font-bold uppercase tracking-wider hover:underline">
+                            Escribir ahora <i class="fa-solid fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="metodos" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+                <div>
+                    <span class="text-amber-600 text-xs font-bold tracking-widest uppercase">Nuestra Carta de Cafés</span>
+                    <h2 class="font-serif text-3xl sm:text-5xl font-bold text-coffee-900 mt-2">Métodos de Preparación</h2>
+                </div>
+                <p class="text-coffee-700 text-sm max-w-md">
+                    Seleccionamos granos frescos con perfil balanceado para brindarte la mejor taza de café del barrio.
+                </p>
+            </div>
+
+            <!-- Methods Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- Method 1: Espreso -->
+                <div class="bg-warmwhite rounded-3xl p-6 border border-amber-300/40 hover:border-amber-500 transition-all shadow-sm hover:shadow-xl flex flex-col justify-between group">
+                    <div class="space-y-4">
+                        <div class="h-48 rounded-2xl overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?q=80&w=600&auto=format&fit=crop" 
+                                 alt="Espreso Starmarc" 
+                                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                 onerror="this.src='https://placehold.co/400x300/3E2D26/FCD34D?text=Espreso'"/>
+                            <span class="absolute top-3 right-3 px-3 py-1 rounded-full bg-coffee-900 text-amber-300 font-bold text-sm shadow">
+                                $2.50 USD
+                            </span>
+                        </div>
+                        <div>
+                            <span class="text-[10px] font-bold text-amber-600 uppercase tracking-widest">Intenso & Concentrado</span>
+                            <h3 class="font-serif text-2xl font-bold text-coffee-900">Espreso</h3>
+                            <p class="text-xs text-coffee-700 mt-2 leading-relaxed">
+                                Extracción a alta presión con crema avellanada densa, cuerpo robusto y notas profundas a chocolate amargo.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="pt-4 border-t border-coffee-900/10 mt-6 flex items-center justify-between text-xs">
+                        <span class="text-coffee-700 font-medium"><i class="fa-solid fa-fire text-amber-500 mr-1"></i>Sirve caliente</span>
+                        <button onclick="selectProductInForm('Espreso ($2.50 USD)', 2.50)" class="font-bold text-coffee-900 hover:text-amber-600 uppercase text-[11px] tracking-wider flex items-center gap-1">
+                            <span>Pedir</span> <i class="fa-solid fa-cart-plus text-amber-500"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Method 2: Filtrado -->
+                <div class="bg-warmwhite rounded-3xl p-6 border border-amber-300/40 hover:border-amber-500 transition-all shadow-sm hover:shadow-xl flex flex-col justify-between group">
+                    <div class="space-y-4">
+                        <div class="h-48 rounded-2xl overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=600&auto=format&fit=crop" 
+                                 alt="Café Filtrado Starmarc" 
+                                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                 onerror="this.src='https://placehold.co/400x300/3E2D26/FCD34D?text=Filtrado'"/>
+                            <span class="absolute top-3 right-3 px-3 py-1 rounded-full bg-coffee-900 text-amber-300 font-bold text-sm shadow">
+                                $3.00 USD
+                            </span>
+                        </div>
+                        <div>
+                            <span class="text-[10px] font-bold text-amber-600 uppercase tracking-widest">Limpio & Aromático</span>
+                            <h3 class="font-serif text-2xl font-bold text-coffee-900">Café Filtrado</h3>
+                            <p class="text-xs text-coffee-700 mt-2 leading-relaxed">
+                                Preparado gota a gota con filtro de papel. Destaca acidez limpia, aromas frutales y sutileza en boca.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="pt-4 border-t border-coffee-900/10 mt-6 flex items-center justify-between text-xs">
+                        <span class="text-coffee-700 font-medium"><i class="fa-solid fa-droplet text-amber-500 mr-1"></i>Extracción lenta</span>
+                        <button onclick="selectProductInForm('Café Filtrado ($3.00 USD)', 3.00)" class="font-bold text-coffee-900 hover:text-amber-600 uppercase text-[11px] tracking-wider flex items-center gap-1">
+                            <span>Pedir</span> <i class="fa-solid fa-cart-plus text-amber-500"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Method 3: Prensa Francesa -->
+                <div class="bg-warmwhite rounded-3xl p-6 border border-amber-300/40 hover:border-amber-500 transition-all shadow-sm hover:shadow-xl flex flex-col justify-between group">
+                    <div class="space-y-4">
+                        <div class="h-48 rounded-2xl overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=600&auto=format&fit=crop" 
+                                 alt="Prensa Francesa Starmarc" 
+                                 class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                 onerror="this.src='https://placehold.co/400x300/3E2D26/FCD34D?text=Prensa+Francesa'"/>
+                            <span class="absolute top-3 right-3 px-3 py-1 rounded-full bg-coffee-900 text-amber-300 font-bold text-sm shadow">
+                                $3.50 USD
+                            </span>
+                        </div>
+                        <div>
+                            <span class="text-[10px] font-bold text-amber-600 uppercase tracking-widest">Cuerpo Completo & Aceites Naturales</span>
+                            <h3 class="font-serif text-2xl font-bold text-coffee-900">Prensa Francesa</h3>
+                            <p class="text-xs text-coffee-700 mt-2 leading-relaxed">
+                                Infusión total por inmersión de 4 minutos. Conserva todos los aceites esenciales del grano con textura sedosa.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="pt-4 border-t border-coffee-900/10 mt-6 flex items-center justify-between text-xs">
+                        <span class="text-coffee-700 font-medium"><i class="fa-solid fa-mug-saucer text-amber-500 mr-1"></i>Para compartir o disfrutar</span>
+                        <button onclick="selectProductInForm('Prensa Francesa ($3.50 USD)', 3.50)" class="font-bold text-coffee-900 hover:text-amber-600 uppercase text-[11px] tracking-wider flex items-center gap-1">
+                            <span>Pedir</span> <i class="fa-solid fa-cart-plus text-amber-500"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="ordenar" class="py-24 bg-coffee-900 text-warmwhite relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Left Details -->
+                <div class="lg:col-span-5 space-y-6">
+                    <span class="text-amber-400 text-xs font-bold tracking-widest uppercase">Sistema de Pedidos Online</span>
+                    <h2 class="font-serif text-3xl sm:text-5xl font-bold leading-tight">Haz tu Pedido Directo por WhatsApp</h2>
+                    <p class="text-coffee-100/80 text-sm leading-relaxed">
+                        Completa tus datos y selecciona tu método preferido. Generaremos tu ticket y te redirigiremos automáticamente al WhatsApp del café: <strong class="text-amber-300">73527729</strong>.
+                    </p>
+
+                    <div class="bg-coffee-800/90 p-6 rounded-3xl border border-amber-400/20 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-xs text-amber-300 font-semibold uppercase tracking-wider">Estado de Atención</span>
+                            <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-[11px] font-bold">
+                                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span> Abierto Ahora
+                            </span>
+                        </div>
+
+                        <div class="flex items-baseline gap-3">
+                            <span class="font-serif text-4xl font-bold text-warmwhite">7:00 a.m.</span>
+                            <span class="text-coffee-100/60 text-xs">en adelante todos los días</span>
+                        </div>
+
+                        <p class="text-[11px] text-coffee-100/60 italic">
+                            * Preparamos tu café al momento en que confirmas el mensaje de WhatsApp.
+                        </p>
+                    </div>
+
+                    <div class="space-y-3 text-xs text-coffee-100/80">
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid fa-phone text-emerald-400 text-base"></i>
+                            <span>Número oficial de atención: <strong>+503 73527729</strong></span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid fa-store text-amber-400 text-base"></i>
+                            <span>Retiro en barra o consumo en mesa</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Interactive Order Form -->
+                <div class="lg:col-span-7">
+                    <div class="bg-warmwhite text-coffee-900 rounded-3xl p-8 sm:p-10 shadow-2xl border border-amber-400/30">
+                        <form id="order-form" onsubmit="event.preventDefault(); sendWhatsAppOrder();" class="space-y-6">
+                            
+                            <h3 class="font-serif text-2xl font-bold text-coffee-900 border-b border-coffee-900/10 pb-3 flex items-center gap-2">
+                                <i class="fa-solid fa-mug-hot text-amber-500"></i> Ordenar en Café Starmarc
+                            </h3>
+
+                            <!-- Select Method -->
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-coffee-800 mb-2">
+                                    1. Selecciona Método de Preparación
+                                </label>
+                                <select id="select-method" onchange="calculateTotal()" class="w-full bg-linen border border-coffee-900/20 rounded-2xl px-4 py-3.5 text-sm font-semibold focus:outline-none focus:border-amber-500">
+                                    <option value="Espreso" data-price="2.50">Espreso ($2.50 USD)</option>
+                                    <option value="Café Filtrado" data-price="3.00">Café Filtrado ($3.00 USD)</option>
+                                    <option value="Prensa Francesa" data-price="3.50">Prensa Francesa ($3.50 USD)</option>
+                                </select>
+                            </div>
+
+                            <!-- Quantity and Temperature -->
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-bold uppercase tracking-wider text-coffee-800 mb-2">
+                                        2. Cantidad de Tazas
+                                    </label>
+                                    <div class="flex items-center gap-3">
+                                        <button type="button" onclick="adjustQty(-1)" class="w-10 h-10 rounded-xl bg-linen border border-coffee-900/20 font-bold text-lg hover:bg-amber-100">-</button>
+                                        <input type="number" id="input-qty" min="1" max="20" value="1" oninput="calculateTotal()" class="w-20 bg-linen border border-coffee-900/20 rounded-xl px-3 py-2 text-center font-bold text-lg text-coffee-900 focus:outline-none">
+                                        <button type="button" onclick="adjustQty(1)" class="w-10 h-10 rounded-xl bg-linen border border-coffee-900/20 font-bold text-lg hover:bg-amber-100">+</button>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label class="block text-xs font-bold uppercase tracking-wider text-coffee-800 mb-2">
+                                        3. Preferencia de Temperatura
+                                    </label>
+                                    <select id="select-temp" class="w-full bg-linen border border-coffee-900/20 rounded-2xl px-4 py-2.5 text-sm font-medium focus:outline-none focus:border-amber-500">
+                                        <option value="Caliente">Caliente</option>
+                                        <option value="Frío con Hielo">Frío con Hielo</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Customer Info -->
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-bold uppercase tracking-wider text-coffee-800 mb-2">
+                                        Tu Nombre
+                                    </label>
+                                    <input type="text" id="input-name" required placeholder="Ej. Carlos Mendoza" class="w-full bg-linen border border-coffee-900/20 rounded-2xl px-4 py-3 text-sm focus:outline-none focus:border-amber-500">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase tracking-wider text-coffee-800 mb-2">
+                                        Hora Estimada de Entrega
+                                    </label>
+                                    <input type="time" id="input-time" required class="w-full bg-linen border border-coffee-900/20 rounded-2xl px-4 py-3 text-sm focus:outline-none focus:border-amber-500">
+                                </div>
+                            </div>
+
+                            <!-- Additional Notes -->
+                            <div>
+                                <label class="block text-xs font-bold uppercase tracking-wider text-coffee-800 mb-2">
+                                    Notas adicionales (Opcional)
+                                </label>
+                                <input type="text" id="input-notes" placeholder="Ej. Con un toque de leche, azucar morena..." class="w-full bg-linen border border-coffee-900/20 rounded-2xl px-4 py-3 text-sm focus:outline-none focus:border-amber-500">
+                            </div>
+
+                            <!-- Summary Display -->
+                            <div class="p-4 rounded-2xl bg-linen border border-amber-300/40 flex justify-between items-center">
+                                <div>
+                                    <span class="text-xs text-coffee-700 block">Total a Pagar</span>
+                                    <span class="font-serif text-2xl font-bold text-coffee-900" id="total-price">$2.50 USD</span>
+                                </div>
+                                <span class="text-[10px] bg-amber-100 text-amber-800 font-bold px-3 py-1.5 rounded-full uppercase">
+                                    Pago directo en caja
+                                </span>
+                            </div>
+
+                            <!-- WhatsApp Submit CTA Button -->
+                            <button type="submit" class="w-full py-4 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs uppercase tracking-widest transition-all shadow-md hover:shadow-xl flex items-center justify-center gap-3 group">
+                                <i class="fa-brands fa-whatsapp text-2xl group-hover:scale-110 transition-transform"></i>
+                                <span>Enviar Orden por WhatsApp al 73527729</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 bg-linen">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
+                <span class="text-amber-600 text-xs font-bold tracking-widest uppercase">Galería Starmarc</span>
+                <h2 class="font-serif text-3xl sm:text-4xl font-bold text-coffee-900">El Ambiente de Nuestro Barrio</h2>
+                <p class="text-coffee-700 text-sm">Un lugar pensado para conversar, trabajar o simplemente saborear un gran café.</p>
+            </div>
+
+            <!-- Gallery Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="h-72 rounded-3xl overflow-hidden relative group">
+                    <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?q=80&w=800&auto=format&fit=crop" 
+                         alt="Interior Café Starmarc" 
+                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                         onerror="this.src='https://placehold.co/600x400/3E2D26/FCD34D?text=Café+Starmarc'"/>
+                    <div class="absolute inset-0 bg-coffee-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+                        <span class="text-warmwhite text-xs font-bold uppercase tracking-widest">Barra de Especialidad</span>
+                    </div>
+                </div>
+
+                <div class="h-72 rounded-3xl overflow-hidden relative group">
+                    <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?q=80&w=800&auto=format&fit=crop" 
+                         alt="Barista extrayendo filtrado" 
+                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                         onerror="this.src='https://placehold.co/600x400/3E2D26/FCD34D?text=Barista'"/>
+                    <div class="absolute inset-0 bg-coffee-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+                        <span class="text-warmwhite text-xs font-bold uppercase tracking-widest">Calibración y Cuidado</span>
+                    </div>
+                </div>
+
+                <div class="h-72 rounded-3xl overflow-hidden relative group">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNer6bsYvqCfiIxxFDfPVUePCMuyF5UwflcO3eAYUouVi4AqTXeYPNRMo&s=10" 
+                         alt="Taza de Café Starmarc" 
+                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                         onerror="this.src='https://placehold.co/600x400/3E2D26/FCD34D?text=Taza+de+Café'"/>
+                    <div class="absolute inset-0 bg-coffee-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+                        <span class="text-warmwhite text-xs font-bold uppercase tracking-widest">Sabor de Barrio Auténtico</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="ubicacion" class="py-24 bg-warmwhite border-t border-amber-500/20">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <div class="lg:col-span-5 space-y-6">
+                    <span class="text-amber-600 text-xs font-bold tracking-widest uppercase">Visítanos</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-bold text-coffee-900">Ubicación & Horarios</h2>
+                    
+                    <div class="space-y-4 text-sm text-coffee-800">
+                        <div class="flex items-start gap-4 p-4 rounded-2xl bg-linen border border-amber-300/30">
+                            <div class="w-10 h-10 rounded-full bg-amber-400/20 flex items-center justify-center text-amber-600 shrink-0">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-coffee-900">Café Starmarc</h4>
+                                <p class="text-xs text-coffee-700 mt-1">
+                                    En el corazón de tu barrio. Ven y disfruta de una taza recién hecha.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 rounded-2xl bg-linen border border-amber-300/30">
+                            <div class="w-10 h-10 rounded-full bg-amber-400/20 flex items-center justify-center text-amber-600 shrink-0">
+                                <i class="fa-solid fa-clock"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-coffee-900">Horario Continuo</h4>
+                                <p class="text-xs text-coffee-700 mt-1">
+                                    <strong>Abrimos todos los días desde las 7 a.m.</strong> hasta las 7 p.m.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MANDATORY SEARCH ON GOOGLE LINK FROM PAGINA2.HTML -->
+                    <div class="pt-2 flex flex-col sm:flex-row gap-4">
+                        <a href="https://www.google.com" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-coffee-900 text-warmwhite text-xs font-bold uppercase tracking-wider hover:bg-coffee-800 transition-all shadow-md">
+                            <i class="fa-brands fa-google text-amber-300"></i> Buscanos en google
+                        </a>
+                        <a href="https://wa.me/50373527729" target="_blank" class="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-emerald-600 text-white text-xs font-bold uppercase tracking-wider hover:bg-emerald-700 transition-all shadow-md">
+                            <i class="fa-brands fa-whatsapp text-lg"></i> Contacto 73527729
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Conceptual Map Display -->
+                <div class="lg:col-span-7">
+                    <div class="rounded-3xl overflow-hidden border-2 border-amber-400/30 h-[380px] relative bg-linen flex items-center justify-center shadow-lg">
+                        <img src="https://images.unsplash.com/photo-1526481280693-3bfa7568e0f3?q=80&w=1000&auto=format&fit=crop" 
+                             alt="Mapa del café" 
+                             class="w-full h-full object-cover opacity-60"/>
+                        
+                        <div class="absolute inset-0 bg-coffee-900/20 backdrop-blur-[2px]"></div>
+
+                        <div class="absolute glass-card p-6 rounded-3xl text-center max-w-xs shadow-2xl border-2 border-amber-400">
+                            <div class="w-12 h-12 rounded-full bg-amber-400 text-coffee-900 mx-auto flex items-center justify-center text-xl mb-3 shadow-md animate-bounce">
+                                <i class="fa-solid fa-mug-hot"></i>
+                            </div>
+                            <h3 class="font-serif text-xl font-bold text-coffee-900">Café Starmarc</h3>
+                            <p class="text-xs text-coffee-700 mt-1">El café de tu barrio</p>
+                            <span class="mt-3 inline-block px-3 py-1 bg-amber-100 text-amber-800 text-[10px] font-bold uppercase rounded-full">
+                                Abierto desde las 7 a.m.
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-coffee-900 text-warmwhite py-12 border-t border-coffee-800">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+            
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 rounded-xl bg-amber-400 flex items-center justify-center text-coffee-900 font-bold text-sm">
+                    <i class="fa-solid fa-mug-hot"></i>
+                </div>
+                <div>
+                    <span class="font-serif text-lg font-bold uppercase tracking-widest text-warmwhite">Café Starmarc</span>
+                    <span class="text-[10px] text-coffee-100/60 block">Tu café del barrio • Pedidos al WhatsApp 73527729</span>
+                </div>
+            </div>
+
+            <div class="flex items-center space-x-6 text-sm text-coffee-100/80">
+                <a href="https://www.google.com" target="_blank" class="hover:text-amber-300 transition-colors text-xs font-semibold">Buscanos en google</a>
+                <a href="https://wa.me/50373527729" target="_blank" class="hover:text-emerald-400 transition-colors text-xs font-semibold flex items-center gap-1">
+                    <i class="fa-brands fa-whatsapp"></i> 73527729
+                </a>
+                <a href="#inicio" class="hover:text-amber-300 transition-colors text-xs font-semibold uppercase tracking-wider">Volver Arriba <i class="fa-solid fa-arrow-up ml-1 text-[10px]"></i></a>
+            </div>
+
+            <p class="text-[11px] text-coffee-100/50 text-center md:text-right">
+                © <span id="year">2026</span> Café Starmarc. Todos los derechos reservados.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Quantity adjustment
+        function adjustQty(change) {
+            const input = document.getElementById('input-qty');
+            let val = parseInt(input.value) || 1;
+            val += change;
+            if (val < 1) val = 1;
+            if (val > 20) val = 20;
+            input.value = val;
+            calculateTotal();
+        }
+
+        // Calculate total order price
+        function calculateTotal() {
+            const select = document.getElementById('select-method');
+            const selectedOption = select.options[select.selectedIndex];
+            const price = parseFloat(selectedOption.getAttribute('data-price')) || 2.50;
+            const qty = parseInt(document.getElementById('input-qty').value) || 1;
+
+            const total = price * qty;
+            document.getElementById('total-price').textContent = `$${total.toFixed(2)} USD`;
+        }
+
+        // Pre-select product from menu cards
+        function selectProductInForm(methodName, price) {
+            const select = document.getElementById('select-method');
+            for (let i = 0; i < select.options.length; i++) {
+                if (select.options[i].value.includes(methodName.split(' ')[0])) {
+                    select.selectedIndex = i;
+                    break;
+                }
+            }
+            calculateTotal();
+            // Smooth scroll to form
+            document.getElementById('ordenar').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Construct and open direct WhatsApp message to phone 73527729
+        function sendWhatsAppOrder() {
+            const name = document.getElementById('input-name').value.trim();
+            const time = document.getElementById('input-time').value;
+            const method = document.getElementById('select-method').value;
+            const qty = document.getElementById('input-qty').value;
+            const temp = document.getElementById('select-temp').value;
+            const notes = document.getElementById('input-notes').value.trim();
+            const total = document.getElementById('total-price').textContent;
+
+            if (!name || !time) {
+                alert("Por favor completa tu nombre y la hora estimada de entrega.");
+                return;
+            }
+
+            // Target WhatsApp Phone Number 73527729
+            const phoneNumber = "50373527729";
+
+            let message = `☕ *NUEVO PEDIDO - CAFÉ STARMARC*\n\n` +
+                          `👤 *Cliente:* ${name}\n` +
+                          `🍵 *Método:* ${method}\n` +
+                          `🔢 *Cantidad:* ${qty} taza(s)\n` +
+                          `🌡️ *Temperatura:* ${temp}\n` +
+                          `⏰ *Hora aproximada:* ${time}\n` +
+                          `💰 *Total estimado:* ${total}\n`;
+
+            if (notes) {
+                message += `📝 *Notas adicionales:* ${notes}\n`;
+            }
+
+            message += `\n¡Quedo a la espera de confirmación! Gracias por mi pedido en Café Starmarc.`;
+
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+
+            // Open WhatsApp link in new tab
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Mobile menu drawer toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Initialize default inputs
+        window.addEventListener('DOMContentLoaded', () => {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            document.getElementById('input-time').value = `${hours}:${minutes}`;
+            document.getElementById('year').textContent = now.getFullYear();
+            calculateTotal();
+        });
+    </script><footer>
+    <p>&copy; 2026 "Marvin Ramirez Todos los derechos reservados";</p>
+</footer>
+</body>
+</html>
